@@ -1,7 +1,7 @@
+import { getAllProducts } from "../services/productService.js";
 
-import {getAllProducts} from '../services/productService.js';
 
-export const getAllProducts = async(req, res) => {
+export const getProducts = async(req, res) => {
     try{
         const products = await getAllProducts();
         res.json(products)
