@@ -1,4 +1,4 @@
-import { createProduct, getAllProducts, getProductById } from "../services/productService.js";
+import { createProduct, deleteProduct, getAllProducts, getProductById, updateProduct} from "../services/productService.js";
 
 
 export const getProducts = async(req, res) => {
@@ -8,7 +8,7 @@ export const getProducts = async(req, res) => {
     }
     catch(error){
         res.status(500).json({
-            error: "Erro ao buscar produtos",
+            error: "Erro ao buscar produtos"
         });
     }
 };
@@ -36,5 +36,25 @@ export const getProduct = async(req, res) => {
     }
     catch (error) {
         res.status(500).json({error: "Erro ao buscar produto"})
+    }
+}
+
+export const updateProductController = async( req, res) => {
+    try{
+        const product = await updateProduct(req.params.id, req.body);
+        res.json(product);
+    }
+    catch(error){
+        res.status(500).json({ error: "Erro ao atualizar produto"});
+    }
+}
+
+export const deleteProductController = async(req, res) => {
+    try{
+        await deleteProduct(req.params.id);
+        res.status(204).send();
+    }
+    catch(error){
+        res.status(500).json({ error: "Erro ao deletar produto"});
     }
 }
